@@ -10,7 +10,6 @@
                 <th scope="col">NOMBRE</th>
                 <th scope="col">SERVICIO</th>
                 <th scope="col">FECHA VENC.</th>
-                <th scope="col">ESTADO</th>
                 <th scope="col">PROC. NUEVO</th>
                 <th scope="col">ACCION</th>
               </tr>
@@ -21,49 +20,52 @@
                 <th scope="col">
                   <div class="input-container">
                     <i class="material-icons">search</i>
-                    <input type="text" >
+                    <input type="text"
+                    [(ngModel)]="filtro"
+                    (ngModelChange)="filtrarDatos()"
+                    class="form-control"
+                    >
                   </div>
                 </th>
                 <th scope="col">
                   <div class="input-container">
                     <i class="material-icons">search</i>
-                    <input type="text" >
+                    <input type="text"
+                    [(ngModel)]="filtroNombre"
+                    (ngModelChange)="filtrarDatosNombre()"
+                    class="form-control"
+                    >
                   </div>
                 </th>
                 <th scope="col">
                   <div class="input-container">
                     <i class="material-icons">search</i>
-                    <input type="text" >
+                    <input type="text" 
+                    [(ngModel)]="filtroServicio"
+                    (ngModelChange)="filtrarDatosServicio()"
+                    class="form-control"
+                    >
                   </div>
                 </th>
               </tr>
-              
-              <tr>
-                <th scope="row">LA650/23</th>
-                <td>MANTENIMIENTOS DE EQUIPOS DE ENDOSCOPIA DIGESTIVA</td>
-                <td>23/09/24</td>
-                <td><button class="btn btn-danger"></button></td>
-                <td><span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></span></td>
+              <ng-container *ngIf="datosFiltrados.length > 0; "></ng-container>
+              <tr *ngFor="let item of datosFiltrados">
+                <th scope="row">{{item.compras_vencimientosNumero}}</th>
+                <td><span class="link" [routerLink]="['/detalles', item.compras_vencimientosNumero]"> {{item.compras_vencimientosNombre}}</span></td>
+                <td>{{item.compras_vencimientosServicio}}</td>
+                <td [ngClass]="getClassForDate(item.compras_vencimientosFecha)">
+                  {{ item.compras_vencimientosFecha | date:'yyyy-MM-dd' }}
+                </td>
+                <td class="checkbox-cell"><input type="checkbox" [checked]="item.compras_vencimientosProcNuevo" (change)="cambiarEstado(item)"></td>
                 <td><span class="material-icons">delete</span></td>
+                
               </tr>
-              <tr>
-                <th scope="row">LA330/23</th>
-                <td>MANTENIMIENTO DE RESONADOR</td>
-                <td>23/12/24</td>
-                <td><button class="btn btn-warning"></button></td>
-                <td><span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></span></td>
-                <td><span class="material-icons">delete</span></td>
-              </tr>
-              <tr>
-                <th scope="row">LA421/23</th>
-                <td>MANTENIMIENTO DE TOMOGRAFO</td>
-                <td>23/01/25</td>
-                <td><button class="btn btn-success"></button></td>
-                <td><span><input class="form-check-input" type="checkbox" value="" id="flexCheckDefault"></span></td>
-                <td><span class="material-icons">delete</span></td>
-              </tr>
+            
             
             </tbody>
           </table>
+          <div *ngIf="datosFiltrados.length === 0">
+           <b><p>NO SE ENCONTRARON RESULTADOS PARA EL VALOR INGRESADO</p></b> 
+          </div>
     </div>
   </div>

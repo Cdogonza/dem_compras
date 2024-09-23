@@ -1,32 +1,32 @@
 [
     {
-      "Nro Compra": "094/24",
+      "Nro_Compra": "094/24",
       "Nombre": "Mantenimiento de Radiografo Digital",
       "servicio": "Service 2024/2025",
-      "fecha venc.": "Agosto 2024 - Mayo 2025"
+      "fecha_venc": "Agosto 2024 - Mayo 2025"
     },
     {
-      "Nro Compra": "317/24",
+      "Nro_Compra": "317/24",
       "Nombre": "Service de Mantenimiento de hasta 2 Reenvasadoras de Dosis Unitaria",
       "servicio": "",
-      "fecha venc.": "Junio 2024 - Nov 2024"
+      "fecha_venc": "Junio 2024 - Nov 2024"
     },
     {
-      "Nro Compra": "246/23",
+      "Nro_Compra": "246/23",
       "Nombre": "Mantenimiento de Mamógrafo",
       "servicio": "Service 2023",
-      "fecha venc.": "Octubre 23 - Set 25"
+      "fecha_venc": "Octubre 23 - Set 25"
     },
     {
-      "Nro Compra": "214/22",
+      "Nro_Compra": "214/22",
       "Nombre": "Mantenimiento de equipos de agua por osmosis inversa",
       "servicio": "Service 2024",
-      "fecha venc.": "Oct 23 - Set 24"
+      "fecha_venc": "Oct 23 - Set 24"
     },
     {
-      "Nro Compra": "286/24",
+      "Nro_Compra": "286/24",
       "Nombre": "Mantenimiento de Tomografo General Electric 600",
       "servicio": "",
-      "fecha venc.": "Agosto 24 - Julio 25"
+      "fecha_venc": "Agosto 24 - Julio 25"
     }
   ]

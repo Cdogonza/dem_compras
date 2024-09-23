@@ -1,0 +1,49 @@
+/* Estilos generales para centrar y separar el contenido de la navbar */
+.detalle-container {
+  margin: 80px auto 20px; /* Separa el contenido de la navbar y lo centra horizontalmente */
+  padding: 20px;
+  max-width: 800px;
+  text-align: left;
+}
+
+/* Estilos para la tarjeta que contiene los detalles */
+.detalle-card {
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+}
+
+/* Estilo para el título */
+.detalle-card h2 {
+  text-align: center;
+  color: #333;
+  margin-bottom: 20px;
+}
+
+/* Estilo para los textos y etiquetas */
+.detalle-card p {
+  font-size: 20px;
+  color: #555;
+  line-height: 1.6;
+  margin: 8px 0;
+}
+
+.detalle-card p strong {
+  color: #333;
+}
+
+/* Estilo para el mensaje cuando no se encuentran detalles */
+.detalle-no-encontrado {
+  text-align: center;
+  color: #999;
+  font-style: italic;
+}
+.btn {
+  display: flex;
+  align-items: center; /* Alinea el ícono y el texto verticalmente */
+}
+
+.btn .material-icons {
+  margin-right: 5px; /* Espacio entre el ícono y el texto */
+}

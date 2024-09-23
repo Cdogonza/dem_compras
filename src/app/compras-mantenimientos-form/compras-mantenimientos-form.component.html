@@ -1,0 +1,61 @@
+<app-navbar></app-navbar>
+<div class="form-container">
+    <form (ngSubmit)="onSubmit()" #comprasForm="ngForm" class="styled-form">
+      <h2>Formulario de Compras</h2>
+  
+      <div class="form-group">
+        <label for="numero">Memo Iniciado</label>
+        <input type="text" id="memo" class="form-control"  [(ngModel)]="compra.compras_vencimientosMemo"(input)="onInput($event)" name="memo">
+      </div>
+      <div class="form-group">
+        <label for="numero">Numero</label>
+        <input type="text" id="numero" class="form-control"  [(ngModel)]="compra.compras_vencimientosNumero"(input)="onInput($event)" name="numero">
+      </div>
+      <div class="form-group">
+        <label for="numero">Nombre</label>
+        <input type="text" id="nombre" class="form-control"  [(ngModel)]="compra.compras_vencimientosNombre" name="nombre">
+      </div>
+      <div class="form-group">
+        <label for="numero">Monto</label>
+        <input type="text" id="monto" class="form-control"  [(ngModel)]="compra.compras_vencimientosMonto" name="monto">
+      </div>
+      <div class="form-group">
+        <label for="numero">Empresa</label>
+        <input type="text" id="empresa" class="form-control"  [(ngModel)]="compra.compras_vencimientosEmpresa" name="empresa">
+      </div>
+  
+      <div class="form-group">
+        <label for="nombre">Monto Final:</label>
+        <input type="text" id="montofinal" class="form-control"  [(ngModel)]="compra.compras_vencimientosMontoFinal" name="montofnal">
+      </div>
+      <div class="form-group">
+        <label for="nombre">Observaciones:</label>
+        <input type="text" id="obs" class="form-control"  [(ngModel)]="compra.compras_vencimientosObs" name="obs">
+      </div>
+      <div class="form-group">
+        <label for="servicio">Servicio</label>
+        <input type="text" id="servicio" class="form-control"  [(ngModel)]="compra.compras_vencimientosServicio" name="servicio">
+      </div>
+  
+      <div class="form-group">
+        <label for="fecha">Fecha</label>
+        <input
+          type="date"
+          id="fecha"
+          class="form-control"
+          required
+          [(ngModel)]="compra.compras_vencimientoFecha"
+          name="fecha"
+          [min]="compra.compras_vencimientoFecha"
+        >
+      </div>
+      <div class="button-group">
+      <button type="button" class="btn btn-secondary" (click)="resetForm()">
+        <span class="material-icons">cleaning_services</span> Limpiar
+      </button>
+      <button type="submit" class="btn btn-primary">Guardar</button>
+    </div>
+      
+    </form>
+  </div>
+  

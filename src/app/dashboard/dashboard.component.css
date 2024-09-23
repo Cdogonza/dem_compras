@@ -17,3 +17,41 @@
     padding: 1px;
     font-size: 16px;
   }
+  .bg-black {
+    background-color: #0a0a0a !important; /* Negro */
+  }
+  .bg-danger {
+    background-color: #dc3545 !important; /* Rojo */
+  }
+  
+  .bg-warning {
+    background-color: #ffc107 !important; /* Amarillo */
+  }
+  
+  .bg-success {
+    background-color: #28a745 !important; /* Verde */
+  }
+  
+  .bg-white {
+    background-color: #ffffff !important; /* Blanco */
+  }
+
+  .checkbox-cell {
+    display: flex;
+    align-items: center; /* Centra verticalmente */
+    justify-content: center; /* Centra horizontalmente (opcional) */
+    height: 50px; /* Ajusta según tu necesidad */
+}
+.link {
+  color: blue; /* Color azul */
+  text-decoration: underline; /* Subrayado */
+  cursor: pointer; /* Cambiar el puntero a una mano */
+}
+
+.link:hover {
+  text-decoration: none; /* Opcional: quitar el subrayado al pasar el mouse */
+}
+.container{
+  margin: auto;
+  margin-top: 100px;
+}

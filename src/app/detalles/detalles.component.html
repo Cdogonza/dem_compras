@@ -1,0 +1,25 @@
+<app-navbar></app-navbar>
+<div class="detalle-container">
+    <div class="detalle-card">
+      <h2>Detalles del Procedimiento</h2>
+      <div *ngIf="detalle">
+        <p><strong>Memo Iniciado:</strong> {{ detalle.compras_vencimientosMemo }}</p>
+        <p><strong>Numero:</strong> {{ detalle.compras_vencimientosNumero }}</p>
+        <p><strong>Nombre:</strong> {{ detalle.compras_vencimientosNombre }}</p>
+        <p><strong>Monto:</strong> {{ detalle.compras_vencimientosMonto }}</p>
+        <p><strong>Empresa:</strong> {{ detalle.compras_vencimientosEmpresa }}</p>
+        <p><strong>Monto Final:</strong> {{ detalle.compras_vencimientosMontoFinal }}</p>
+        <p><strong>Observaciones:</strong> {{ detalle.compras_vencimientosObs }}</p>
+        <p><strong>Servicio:</strong> {{ detalle.compras_vencimientosServicio }}</p>
+        <p><strong>Fecha de Vencimiento:</strong> {{ detalle.compras_vencimientosFecha | date }}</p>
+        <p><strong>Proceso Nuevo:</strong> {{ detalle.compras_vencimientosProcNuevo ? 'Sí' : 'No' }}</p>
+        <button type="button" class="btn btn-primary" (click)="goToDashboard()">
+          <span class="material-icons">arrow_back</span> VOLVER
+        </button>
+      </div>
+      <div *ngIf="!detalle" class="detalle-no-encontrado">
+        <p>No se encontraron detalles para este registro.</p>
+      </div>
+    </div>
+  </div>
+  
