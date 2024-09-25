@@ -1,5 +1,6 @@
 import { Routes } from '@angular/router';
 import { DetallesComponent } from './detalles/detalles.component';
+import { ProcEnCursComponent } from './proc-en-curs/proc-en-curs.component';
 
 export const routes: Routes = [
   {
@@ -31,6 +32,10 @@ export const routes: Routes = [
       {
         path: 'detalles/:id',
         component: DetallesComponent,
+      },
+      {
+        path: 'proc-en-curso/:id',
+        component: ProcEnCursComponent,
       },
     // otras rutas...
   ];

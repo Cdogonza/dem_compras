@@ -6,12 +6,11 @@
   
             <thead>
               <tr>
-                <th scope="col">Nro COMPRA</th>
+                <th scope="col">Nro MEMO</th>
                 <th scope="col">NOMBRE</th>
-                <th scope="col">SERVICIO</th>
-                <th scope="col">FECHA VENC.</th>
-                <th scope="col">PROC. EN CURSO</th>
-                <th scope="col">ACCION</th>
+                <th scope="col">MONTO INICIADO</th>
+                <th scope="col">FECHA DE CREACION</th>
+                <th scope="col">OBSERVACIONES</th>
               </tr>
             </thead>
             
@@ -50,16 +49,13 @@
               </tr>
               <ng-container *ngIf="datosFiltrados.length > 0; "></ng-container>
               <tr *ngFor="let item of datosFiltrados">
-                <th scope="row">{{item.compras_vencimientosNumero}}</th>
-                <td><span class="link" [routerLink]="['/detalles', item.compras_vencimientosNumero]"> {{item.compras_vencimientosNombre}}</span></td>
-                <td>{{item.compras_vencimientosServicio}}</td>
-                <td [ngClass]="getClassForDate(item.compras_vencimientosFecha)">
-                  {{ item.compras_vencimientosFecha | date:'yyyy-MM-dd' }}
+                <th scope="row">{{item.proc_en_cursoMemo}}</th>
+                <td><span class="link" [routerLink]="['/detalles', item.proc_en_cursoNombre]"> {{item.proc_en_cursoNombre}}</span></td>
+                <td>$ {{item.proc_en_cursoMontoIniciado}}</td>
+                <td>
+                  {{ item.proc_en_cursoFechaCreacion | date:'yyyy-MM-dd' }}
                 </td>
-                <!-- <td class="checkbox-cell"><input type="checkbox" [checked]="item.compras_vencimientosProcNuevo" (change)="cambiarEstado(item)"></td> -->
-                <td ><button *ngIf="item.compras_vencimientosProcNuevo" class="btn-transparent" [routerLink]="['/proc-en-curso', item.idcompras_vencimientos]"><i class="fa-regular fa-eye icono-separado"></i>Ver Proc.</button></td>
-                <td><span class="material-icons">delete</span></td>
-                
+                <td>{{item.proc_en_cursoObs}}</td>            
               </tr>
             
             

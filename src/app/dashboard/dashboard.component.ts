@@ -23,6 +23,8 @@ export class DashboardComponent implements OnInit {
   filtro: string = '';
   filtroNombre: string = '';
   filtroServicio: string = '';
+  linkProcNuevo:boolean=false;
+
   constructor(private dataService: DataService,public dialog: MatDialog, private router:Router) { }
 
   ngOnInit(): void {
@@ -47,6 +49,28 @@ filtrarDatosNombre(): void {
       dato.compras_vencimientosServicio.includes(this.filtroServicio.toUpperCase())
     );
   }
+
+
+  getClassForDate(fecha: string): string {
+    const fechaVencimiento = new Date(fecha);
+    const fechaActual = new Date();
+    const mesesRestantes = differenceInMonths(fechaVencimiento, fechaActual);
+
+    if (mesesRestantes <= 0) {
+      return 'bg-black text-white'; // Rojo con texto blanco
+    }
+    else if (mesesRestantes > 0 && mesesRestantes <= 3) {
+      return 'bg-danger'; // Rojo
+    } 
+     else if (mesesRestantes > 3 && mesesRestantes <= 6) {
+      return 'bg-warning'; // Amarillo
+    } else if (mesesRestantes > 6 && mesesRestantes <= 12) {
+      return 'bg-success text-white'; // Verde con texto blanco
+    } else {
+      return 'bg-white'; // Blanco
+    }
+  }
+
 // Método para manejar el cambio del checkbox
 cambiarEstado(item: any): void {
   let estadoEnvio:number =0;
@@ -71,26 +95,18 @@ console.log('estadoEnvio:', estadoEnvio);
     }
   );
 }
+// Método para ver si hay un procedimeinto en curso de una compra, y de ahi cambia el valor del boolean para que aparezca el linck de ver proc o no.
+ChequoEstadoProcNuevo(item: any): void {
+ 
+  const nuevoEstado = item.compras_vencimientosProcNuevo; 
 
-  getClassForDate(fecha: string): string {
-    const fechaVencimiento = new Date(fecha);
-    const fechaActual = new Date();
-    const mesesRestantes = differenceInMonths(fechaVencimiento, fechaActual);
+if (item.compras_vencimientosProcNuevo) {
+  this.linkProcNuevo=true;
 
-    if (mesesRestantes <= 0) {
-      return 'bg-black text-white'; // Rojo con texto blanco
-    }
-    else if (mesesRestantes > 0 && mesesRestantes <= 3) {
-      return 'bg-danger'; // Rojo
-    } 
-     else if (mesesRestantes > 3 && mesesRestantes <= 6) {
-      return 'bg-warning'; // Amarillo
-    } else if (mesesRestantes > 6 && mesesRestantes <= 12) {
-      return 'bg-success text-white'; // Verde con texto blanco
-    } else {
-      return 'bg-white'; // Blanco
-    }
-  }
+}else{
+  this.linkProcNuevo=false;
+}
+}
 }
 
 

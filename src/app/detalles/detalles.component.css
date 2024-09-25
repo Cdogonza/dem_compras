@@ -47,3 +47,14 @@
 .btn .material-icons {
   margin-right: 5px; /* Espacio entre el ícono y el texto */
 }
+
+.botones-container {
+  display: flex;
+  justify-content: space-evenly; /* Distribuye espacio entre los botones */
+  gap: 10px; /* Espacio entre botones */
+}
+
+.btn {
+  flex-basis: 25%; /* Ocupa un cuarto del ancho disponible */
+  text-align: center;
+}

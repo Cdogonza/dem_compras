@@ -32,4 +32,9 @@ export class DetallesComponent implements OnInit{
   goToDashboard() {
     this.router.navigate(['/dashboard']); // Cambia la ruta según tu configuración
   }
+
+  goToFormulario() {
+    this.router.navigate(['/ruta-del-formulario']);  // Asegúrate de usar la ruta correcta
+  }
+  
 }

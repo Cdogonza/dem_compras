@@ -12,10 +12,17 @@
         <p><strong>Observaciones:</strong> {{ detalle.compras_vencimientosObs }}</p>
         <p><strong>Servicio:</strong> {{ detalle.compras_vencimientosServicio }}</p>
         <p><strong>Fecha de Vencimiento:</strong> {{ detalle.compras_vencimientosFecha | date }}</p>
-        <p><strong>Proceso Nuevo:</strong> {{ detalle.compras_vencimientosProcNuevo ? 'Sí' : 'No' }}</p>
-        <button type="button" class="btn btn-primary" (click)="goToDashboard()">
-          <span class="material-icons">arrow_back</span> VOLVER
-        </button>
+       
+        <p><strong>Procedimiento en curso:</strong> {{ detalle.compras_vencimientosProcNuevo ? 'Sí' : 'No' }}</p>
+        <div class="botones-container">
+          <button *ngIf="!detalle.compras_vencimientosProcNuevo" type="button" class="btn btn-success" (click)="goToFormulario()">
+            <span class="material-icons">add</span> Agregar Compra
+          </button>
+  
+          <button type="button" class="btn btn-primary" (click)="goToDashboard()">
+            <span class="material-icons">arrow_back</span> VOLVER
+          </button>
+        </div>
       </div>
       <div *ngIf="!detalle" class="detalle-no-encontrado">
         <p>No se encontraron detalles para este registro.</p>
