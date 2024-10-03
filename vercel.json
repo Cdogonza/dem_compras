@@ -5,20 +5,11 @@
       "use": "@vercel/angular"
     }
   ],
-  "rewrites": [
-    {
+
+  "routes": [
+   {
       "source": "/(.*)",
       "destination": "/index.html"
-    }
-  ],
-  "routes": [
-    {
-      "src": "/assets/(.*)",
-      "dest": "/assets/$1"
-    },
-    {
-      "src": "/favicon.ico",
-      "dest": "/favicon.ico"
     }
   ],
   "outputDirectory": "dist/dem_compras"
