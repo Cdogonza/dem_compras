@@ -86,3 +86,16 @@ th {
 .icono-separado {
   margin-right: 5px; /* Añade espacio entre el icono y el texto */
 }
+table {
+  width: 100%; /* Asegura que la tabla ocupe todo el ancho disponible */
+  border-collapse: collapse; /* Elimina espacios entre celdas */
+}
+th, td {
+  border: 1px solid #ddd; /* Borde ligero para celdas */
+  padding: 4px; /* Espaciado interno para las celdas */
+  text-align: left; /* Alineación horizontal del texto en las celdas */
+  vertical-align: middle; /* Alineación vertical del texto */
+}
+tr:hover {
+  background-color: #f5f5f5; /* Color de fondo al pasar el ratón sobre la fila */
+}

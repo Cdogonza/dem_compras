@@ -3,23 +3,33 @@
     <div class="detalle-card">
       <h2>Detalles del Procedimiento</h2>
       <div *ngIf="detalle">
-        <p><strong>Memo Iniciado:</strong> {{ detalle.compras_vencimientosMemo }}</p>
-        <p><strong>Numero:</strong> {{ detalle.compras_vencimientosNumero }}</p>
-        <p><strong>Nombre:</strong> {{ detalle.compras_vencimientosNombre }}</p>
-        <p><strong>Monto:</strong> {{ detalle.compras_vencimientosMonto }}</p>
-        <p><strong>Empresa:</strong> {{ detalle.compras_vencimientosEmpresa }}</p>
-        <p><strong>Monto Final:</strong> {{ detalle.compras_vencimientosMontoFinal }}</p>
-        <p><strong>Observaciones:</strong> {{ detalle.compras_vencimientosObs }}</p>
-        <p><strong>Servicio:</strong> {{ detalle.compras_vencimientosServicio }}</p>
-        <p><strong>Fecha de Vencimiento:</strong> {{ detalle.compras_vencimientosFecha | date }}</p>
-       
-        <p><strong>Procedimiento en curso:</strong> {{ detalle.compras_vencimientosProcNuevo ? 'Sí' : 'No' }}</p>
+        <p><strong>Fecha de Creacion:</strong> {{ detalle.proc_en_cursoFechaCreacion.split('T')[0] }}</p>
+        <p><strong>Memo Iniciado:</strong> {{ detalle.proc_en_cursoMemo }}</p>
+        <p><strong>Tipo de Compra:</strong> {{ detalle.proc_en_cursoTipoCompra }}</p>
+        <p><strong>Numero:</strong> {{ detalle.proc_en_cursoNumero }}</p>
+        <p><strong>Nombre:</strong> {{ detalle.proc_en_cursoNombre }}</p>
+
+        <p><strong>Resolucion Final:</strong> {{ detalle.proc_en_cursoResolucionFinal }}</p>
+        <p><strong>Monto Inicial:</strong> {{ detalle.proc_en_cursoMontoInicial }}</p>
+        <p><strong>Monto Final:</strong> {{ detalle.proc_en_cursoMontoFinal }}</p>
+
+        <p><strong>Rubro:</strong> {{ detalle.proc_en_cursoRubro }}</p>
+        <p><strong>Empresa:</strong> {{ detalle.proc_en_cursoEmpresa }}</p>
+        <p><strong>Tiempo:</strong> {{ detalle.proc_en_cursoTiempo }}</p>
+        <p><strong>Observaciones:</strong> {{ detalle.proc_en_cursoObs }}</p>
+        <p><strong>Regimen:</strong> {{ detalle.proc_en_cursoRegimen }}</p>
+        <p><strong>Fecha de Inicio:</strong> {{ detalle.proc_en_cursoFechaInicio.split('T')[0] }}</p>
+        <p><strong>Fecha de Finalizacion:</strong> {{ detalle.proc_en_cursoFechaFin.split('T')[0]}}</p>
+        <p><strong>Procedimiento en curso:</strong> {{ detalle.proc_en_cursoProcNuevo ? 'Sí' : 'No' }}</p>
         <div class="botones-container">
-          <button *ngIf="!detalle.compras_vencimientosProcNuevo" type="button" class="btn btn-success" (click)="goToFormulario()">
+          <button *ngIf="detalle && (!detalle.proc_en_cursoProcNuevo)" type="button" class="btn btn-success btn-lg d-flex align-items-center px-4" [routerLink]="['/form_new_proc', detalle.idproc_en_curso, 'noEditar']">
             <span class="material-icons">add</span> Agregar Compra
           </button>
-  
-          <button type="button" class="btn btn-primary" (click)="goToDashboard()">
+          <button type="button" class="btn btn-warning btn-lg d-flex align-items-center px-4" [routerLink]="['/form_new_proc', detalle.idproc_en_curso, 'editar']">
+            <span class="material-icons me-2">edit</span>
+            EDITAR
+          </button>
+          <button type="button" class="btn btn-primary btn-lg d-flex align-items-center px-4" (click)="volver()">
             <span class="material-icons">arrow_back</span> VOLVER
           </button>
         </div>

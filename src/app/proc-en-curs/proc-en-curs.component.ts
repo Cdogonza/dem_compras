@@ -1,7 +1,7 @@
 import { Component,OnInit  } from '@angular/core';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { NgFor } from '@angular/common';
-import { ProcCursoDataService } from '../services/proc-curso-data.service';
+import { DataService } from '../services/data.service';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
 import { MatDialog } from '@angular/material/dialog';
@@ -23,7 +23,7 @@ export class ProcEnCursComponent implements OnInit {
   filtroNombre: string = '';
   filtroServicio: string = '';
   detalle: any;
-  constructor(private dataService: ProcCursoDataService,public dialog: MatDialog, private router:Router,private route: ActivatedRoute) { }
+  constructor(private dataService: DataService,public dialog: MatDialog, private router:Router,private route: ActivatedRoute) { }
 
   ngOnInit(): void {
 
@@ -31,16 +31,16 @@ export class ProcEnCursComponent implements OnInit {
     const id = this.route.snapshot.paramMap.get('id');
     if (id !== null) {
       if(id === '0'){
-        this.dataService.getDatos().subscribe((data) => {
+        this.dataService.getDatos('enCurso').subscribe((data) => {
           this.datos = data;
           this.datosFiltrados = data; // Inicialmente, mostrar todos los datos
         });
-      }
-      this.dataService.getProcedimientoRelacionado(id).subscribe((data) => {
+      }else{
+      this.dataService.getDatoPorId(id,'enCurso').subscribe((data) => {
         this.detalle = data;
         this.datosFiltrados = [this.detalle]; // Mostrar solo el detalle del procedimiento
       });
-   
+    }
   }
   }
 

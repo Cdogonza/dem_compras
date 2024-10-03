@@ -8,10 +8,9 @@
               <tr>
                 <th scope="col">Nro COMPRA</th>
                 <th scope="col">NOMBRE</th>
-                <th scope="col">SERVICIO</th>
                 <th scope="col">FECHA VENC.</th>
                 <th scope="col">PROC. EN CURSO</th>
-                <th scope="col">ACCION</th>
+                <th scope="col">OBSERVACION</th>
               </tr>
             </thead>
             
@@ -41,32 +40,34 @@
                   <div class="input-container">
                     <i class="material-icons">search</i>
                     <input type="text" 
-                    [(ngModel)]="filtroServicio"
+                    [(ngModel)]="filtroObs"
                     (ngModelChange)="filtrarDatosServicio()"
                     class="form-control"
                     >
                   </div>
                 </th>
               </tr>
-              <ng-container *ngIf="datosFiltrados.length > 0; "></ng-container>
-              <tr *ngFor="let item of datosFiltrados">
-                <th scope="row">{{item.compras_vencimientosNumero}}</th>
-                <td><span class="link" [routerLink]="['/detalles', item.compras_vencimientosNumero]"> {{item.compras_vencimientosNombre}}</span></td>
-                <td>{{item.compras_vencimientosServicio}}</td>
-                <td [ngClass]="getClassForDate(item.compras_vencimientosFecha)">
-                  {{ item.compras_vencimientosFecha | date:'yyyy-MM-dd' }}
+              <!-- <ng-container *ngIf="datosFiltrados.length > 0; "> -->
+                <ng-container *ngFor="let item of datosFiltrados">
+              <tr *ngIf="!isDateAfter2000(item.proc_en_cursoFechaInicio)">
+                <th scope="row">{{item.proc_en_cursoTipoCompra}}{{item.proc_en_cursoNumero}}</th>
+                <td><span class="link" [routerLink]="['/detalles', item.idproc_en_curso]"> {{item.proc_en_cursoNombre}}</span></td>
+                <td [ngClass]="getClassForDate(item.proc_en_cursoFechaFin)">
+                  {{ item.proc_en_cursoFechaFin | date:'yyyy-MM-dd' }}
                 </td>
                 <!-- <td class="checkbox-cell"><input type="checkbox" [checked]="item.compras_vencimientosProcNuevo" (change)="cambiarEstado(item)"></td> -->
-                <td ><button *ngIf="item.compras_vencimientosProcNuevo" class="btn-transparent" [routerLink]="['/proc-en-curso', item.idcompras_vencimientos]"><i class="fa-regular fa-eye icono-separado"></i>Ver Proc.</button></td>
-                <td><span class="material-icons">delete</span></td>
-                
+                <td ><button *ngIf="item.proc_en_cursoProcNuevo;  else noProcesses" class="btn-transparent" [routerLink]="['/proc-en-curso', item.idproc_en_curso]"><i class="fa-regular fa-eye icono-separado"></i>Ver Proc.</button></td>
+                <td>{{item.proc_en_cursoObs}}</td>
               </tr>
-            
+            </ng-container>
             
             </tbody>
           </table>
           <div *ngIf="datosFiltrados.length === 0">
            <b><p>NO SE ENCONTRARON RESULTADOS PARA EL VALOR INGRESADO</p></b> 
           </div>
+          <ng-template #noProcesses>
+            <p>No hay proc.</p>
+          </ng-template>
     </div>
   </div>

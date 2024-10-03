@@ -66,8 +66,11 @@ thead {
   border-collapse: collapse; /* Asegura que los bordes se vean bien */
 }
 
-th {
-  width: auto; /* Ajusta el ancho al contenido */
+th, td {
+  border: 1px solid #ddd; /* Borde ligero para celdas */
+  padding: 4px; /* Espaciado interno para las celdas */
+  text-align: left; /* Alineación horizontal del texto en las celdas */
+  vertical-align: middle; /* Alineación vertical del texto */
 }
 
 .btn-transparent {

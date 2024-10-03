@@ -50,8 +50,8 @@
               <ng-container *ngIf="datosFiltrados.length > 0; "></ng-container>
               <tr *ngFor="let item of datosFiltrados">
                 <th scope="row">{{item.proc_en_cursoMemo}}</th>
-                <td><span class="link" [routerLink]="['/detalles', item.proc_en_cursoNombre]"> {{item.proc_en_cursoNombre}}</span></td>
-                <td>$ {{item.proc_en_cursoMontoIniciado}}</td>
+                <td><span class="link" [routerLink]="['/detalles', item.idproc_en_curso]"> {{item.proc_en_cursoNombre}}</span></td>
+                <td>$ {{item.proc_en_cursoMontoInicial}}</td>
                 <td>
                   {{ item.proc_en_cursoFechaCreacion | date:'yyyy-MM-dd' }}
                 </td>

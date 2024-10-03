@@ -1,88 +1,90 @@
-import { Component } from '@angular/core';
+import { Component,OnInit, NgZone } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Router } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { ActivatedRoute, Router } from '@angular/router';
+import { FormGroup,FormBuilder, FormsModule,ReactiveFormsModule  } from '@angular/forms';
 import { NavbarComponent } from '../navbar/navbar.component';
 import { DataService } from '../services/data.service';
 import { Notify } from 'notiflix/build/notiflix-notify-aio';
 import { Loading } from 'notiflix/build/notiflix-loading-aio';
+import { NgIf } from '@angular/common';
 
 
 @Component({
   selector: 'app-compras-mantenimientos-form',
   standalone: true,
-  imports: [FormsModule,NavbarComponent],
+  imports: [NgIf,FormsModule, NavbarComponent,ReactiveFormsModule],
   templateUrl: './compras-mantenimientos-form.component.html',
   styleUrl: './compras-mantenimientos-form.component.css'
 })
-export class ComprasMantenimientosFormComponent {
+export class ComprasMantenimientosFormComponent implements OnInit {
 
-
-  compra = {
-    compras_vencimientosMemo: '',
-    compras_vencimientosNumero: '',
-    compras_vencimientosNombre: '',
-    compras_vencimientosMonto: '',
-    compras_vencimientosEmpresa: '',
-    compras_vencimientosMontoFinal: '',
-    compras_vencimientosObs: '',
-    compras_vencimientosRegimen: '',
-    compras_vencimientosResFinal: '',
-    compras_vencimientosServicio: '',
-    compras_vencimientoFecha: '',
-    compras_vencimientosProcNuevo: false
-  };
-
-  constructor(private dataService: DataService,private http: HttpClient, private router: Router) {
+  compraForm!: FormGroup;
+  nuevoProc:boolean = false;
+  constructor(private fb: FormBuilder,private dataService: DataService, private http: HttpClient, private route: ActivatedRoute) {
     const today = new Date();
-    this.compra.compras_vencimientoFecha = today.toISOString().split('T')[0];
+    this.compraForm = this.fb.group({
+      // Otras propiedades del formulario aquí...
+      proc_en_cursoFechaCreacion: [today.toISOString().split('T')[0]],
+      proc_en_cursoMemo: [''],
+      proc_en_cursoNombre: [''],
+      proc_en_cursoTipoCompra: [''],
+      proc_en_cursoMontoInicial: [''],
+      proc_en_cursoEmpresa: [''],
+      proc_en_cursoTiempo: [''],
+      proc_en_cursoObs: [''],
+      proc_en_cursoRegimen: [''],
+      proc_en_cursoFechaInicio: ['1000-01-01'],
+      proc_en_cursoFechaFin: ['1000-01-01'],
+      proc_en_cursoProcNuevo: ['0'],
+    });
   }
 
-  onSubmit() {
-    Loading.standard('Cargando...');
-    this.compra.compras_vencimientosMemo = this.compra.compras_vencimientosMemo.toUpperCase();
-    this.compra.compras_vencimientosNumero = this.compra.compras_vencimientosNumero.toUpperCase();
-    this.compra.compras_vencimientosNombre = this.compra.compras_vencimientosNombre.toUpperCase();
-    this.compra.compras_vencimientosMonto = this.compra.compras_vencimientosMonto.toUpperCase();
-    this.compra.compras_vencimientosEmpresa = this.compra.compras_vencimientosEmpresa.toUpperCase();
-    this.compra.compras_vencimientosMontoFinal = this.compra.compras_vencimientosMontoFinal.toUpperCase();
-    this.compra.compras_vencimientosObs = this.compra.compras_vencimientosObs.toUpperCase();
-    this.compra.compras_vencimientosRegimen = this.compra.compras_vencimientosRegimen.toUpperCase();
-    this.compra.compras_vencimientosResFinal = this.compra.compras_vencimientosResFinal.toUpperCase();
-    this.compra.compras_vencimientosServicio = this.compra.compras_vencimientosServicio.toUpperCase();
+  ngOnInit() {
+    const id = this.route.snapshot.paramMap.get('id');
+    if (id !== null) {
+      if (id === '0') {
+        this.nuevoProc = false;
+      }
+    } else {
+      // Handle the case where id is null
+      console.error('ID is null');
+    }
+    
+  }
 
-    this.dataService.addCompra(this.compra).subscribe({
+  onSubmit() { 
+
+    Loading.standard('Cargando...');
+    // convertir todos los datos del formulario a mayuscula
+    Object.keys(this.compraForm.controls).forEach(key => {
+      const control = this.compraForm.get(key);
+      if (control) {
+        control.setValue(control.value.toString().toUpperCase());
+        console.log(control.value);
+      }
+    });
+
+    this.dataService.addCompra('nueva',this.compraForm.value).subscribe({
       next: (response) => {
         Loading.remove(2000);
-        Notify.success('Bienvenido');
+        Notify.success('Procedimiento Agregado Correctamente');
         console.log('Compra añadida con éxito:', response);
-        // Aquí puedes mostrar un mensaje al usuario o reiniciar el formulario
+      
         this.resetForm();
       },
       error: (error) => {
-        Notify.failure('Ocurrio un Error');
+        Notify.failure('Algo salio mal al completar el formulario');
         Loading.remove(2000);
         console.error('Error al añadir compra:', error);
-        // Aquí puedes manejar el error, como mostrar un mensaje al usuario
       }
     });
+
+
+
   }
   resetForm() {
     // Reiniciar el formulario
-    this.compra = {
-      compras_vencimientosMemo: '',
-    compras_vencimientosNumero: '',
-    compras_vencimientosNombre: '',
-    compras_vencimientosMonto: '',
-    compras_vencimientosEmpresa: '',
-    compras_vencimientosMontoFinal: '',
-    compras_vencimientosObs: '',
-    compras_vencimientosRegimen: '',
-    compras_vencimientosResFinal: '',
-    compras_vencimientosServicio: '',
-      compras_vencimientoFecha: new Date().toISOString().split('T')[0],
-      compras_vencimientosProcNuevo: false
-    };
+   this.compraForm.reset();
   }
   onInput(event: Event) {
     const input = event.target as HTMLInputElement;

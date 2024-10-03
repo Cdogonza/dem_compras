@@ -22,49 +22,67 @@ export class DashboardComponent implements OnInit {
   datosFiltrados: any[] = [];
   filtro: string = '';
   filtroNombre: string = '';
-  filtroServicio: string = '';
+  filtroObs: string = '';
   linkProcNuevo:boolean=false;
+  noAdjudicado:boolean=true;
 
   constructor(private dataService: DataService,public dialog: MatDialog, private router:Router) { }
 
   ngOnInit(): void {
     // Obtener todos los datos al iniciar el componente
-    this.dataService.getDatos().subscribe((data) => {
-      this.datos = data;
-      this.datosFiltrados = data; // Inicialmente, mostrar todos los datos
-    });
+    this.dataService.getDatos('vigentes').subscribe((data) => {
+      this.datosFiltrados = data;
+  });
   }
   filtrarDatos(): void {
     this.datosFiltrados = this.datos.filter((dato) =>
-      dato.compras_vencimientosNumero.includes(this.filtro.toUpperCase())
+      this.isDateAfter2000(dato.fecha) && this.isNameMatch(dato.nombre, this.filtro)
+
+
     );
   }
-filtrarDatosNombre(): void {
+  filtrarDatosNombre(): void {
     this.datosFiltrados = this.datos.filter((dato) =>
-      dato.compras_vencimientosNombre.includes(this.filtroNombre.toLocaleUpperCase())
+      this.isDateAfter2000(dato.fecha) && this.isNameMatch(dato.nombre, this.filtro)
     );
   }
   filtrarDatosServicio(): void {
     this.datosFiltrados = this.datos.filter((dato) =>
-      dato.compras_vencimientosServicio.includes(this.filtroServicio.toUpperCase())
+      this.isDateAfter2000(dato.fecha) && this.isNameMatch(dato.nombre, this.filtro)
     );
   }
+
+  isNameMatch(name: string, searchText: string): boolean {
+    return name.toLowerCase().includes(searchText.toLowerCase());
+  }
+
+  isDateAfter2000(dateString: string): boolean {
+    const date = new Date(dateString);
+    return date.getFullYear() < 2000;
+  }
+
+
 
 
   getClassForDate(fecha: string): string {
     const fechaVencimiento = new Date(fecha);
     const fechaActual = new Date();
     const mesesRestantes = differenceInMonths(fechaVencimiento, fechaActual);
+    const aniosdiferencia = fechaActual.getFullYear() -fechaVencimiento.getFullYear() ;
 
+    if(aniosdiferencia <2000){
+
+      this.noAdjudicado=true;
+    }
     if (mesesRestantes <= 0) {
       return 'bg-black text-white'; // Rojo con texto blanco
     }
-    else if (mesesRestantes > 0 && mesesRestantes <= 3) {
+    else if (mesesRestantes > 0 && mesesRestantes <= 6) {
       return 'bg-danger'; // Rojo
     } 
-     else if (mesesRestantes > 3 && mesesRestantes <= 6) {
+     else if (mesesRestantes > 6 && mesesRestantes <= 12) {
       return 'bg-warning'; // Amarillo
-    } else if (mesesRestantes > 6 && mesesRestantes <= 12) {
+    } else if (mesesRestantes > 12 && mesesRestantes <= 18) {
       return 'bg-success text-white'; // Verde con texto blanco
     } else {
       return 'bg-white'; // Blanco

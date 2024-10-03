@@ -1,14 +1,14 @@
 <app-navbar></app-navbar>
-<form (ngSubmit)="onSubmit()" [formGroup]="compraForm" class="styled-form">
+<form [formGroup]="compraForm" class="styled-form">
 
     <div>
         <label for="proc_en_cursoFechaCreacion">Fecha de Creación:</label>
-        <input id="proc_en_cursoFechaCreacion" readonly formControlName="proc_en_cursoFechaCreacion" type="date" />
+        <input id="proc_en_cursoFechaCreacion" formControlName="proc_en_cursoFechaCreacion" type="date" />
     </div>
 
     <div>
         <label for="proc_en_cursoMemo">Memo:</label>
-        <input  (input)="onInput($event)" id="proc_en_cursoMemo" formControlName="proc_en_cursoMemo" type="text" />
+        <input id="proc_en_cursoMemo" formControlName="proc_en_cursoMemo" type="text" />
     </div>
 
     <div>
@@ -16,26 +16,36 @@
         <input id="proc_en_cursoNombre" formControlName="proc_en_cursoNombre" type="text" />
     </div>
 
-    <!-- <div *ngIf="nuevoProc">
+    <div>
         <label for="proc_en_cursoNumero">Número:</label>
         <input id="proc_en_cursoNumero" formControlName="proc_en_cursoNumero" type="text" />
-    </div> -->
+    </div>
 
     <div>
         <label for="proc_en_cursoTipoCompra">Tipo de Compra:</label>
-        <input  (input)="onInput($event)" id="proc_en_cursoTipoCompra" formControlName="proc_en_cursoTipoCompra" type="text" />
+        <input id="proc_en_cursoTipoCompra" formControlName="proc_en_cursoTipoCompra" type="text" />
     </div>
 
     <div>
         <label for="proc_en_cursoMontoInicial">Monto Inicial:</label>
         <input id="proc_en_cursoMontoInicial" formControlName="proc_en_cursoMontoInicial" type="text" />
     </div>
-
-    <!-- <div *ngIf="nuevoProc">
+    <div>
+        <label for="proc_en_cursoResolucionFinal">Resolucion Final:</label>
+        <input id="proc_en_cursoResolucionFinal" formControlName="proc_en_cursoResolucionFinal" type="text" />
+    </div>
+    <div>
         <label for="proc_en_cursoMontoFinal">Monto Final:</label>
         <input id="proc_en_cursoMontoFinal" formControlName="proc_en_cursoMontoFinal" type="text" />
-    </div> -->
-
+    </div>
+    <div>
+        <label for="proc_en_cursoMontoInicial">Monto Inicial:</label>
+        <input id="proc_en_cursoMontoInicial" formControlName="proc_en_cursoMontoInicial" type="text" />
+    </div>
+    <div>
+        <label for="proc_en_cursoRubro">Rubro:</label>
+        <input id="proc_en_cursoRubro" formControlName="proc_en_cursoRubro" type="text" />
+    </div>
     <div>
         <label for="proc_en_cursoEmpresa">Empresa:</label>
         <input id="proc_en_cursoEmpresa" formControlName="proc_en_cursoEmpresa" type="text" />
@@ -48,7 +58,7 @@
 
     <div>
         <label for="proc_en_cursoObs">Observaciones:</label>
-        <textarea  (input)="onInput($event)" id="proc_en_cursoObs" formControlName="proc_en_cursoObs"></textarea>
+        <textarea id="proc_en_cursoObs" formControlName="proc_en_cursoObs"></textarea>
     </div>
 
     <div>
@@ -56,17 +66,17 @@
         <input id="proc_en_cursoRegimen" formControlName="proc_en_cursoRegimen" type="text" />
     </div>
 
-    <!-- <div *ngIf="nuevoProc">
+    <div>
         <label for="proc_en_cursoFechaInicio">Fecha de Inicio:</label>
-        <input id="proc_en_cursoFechaInicio" formControlName="proc_en_cursoFechaInicio" type="date" />
-    </div> -->
-<!-- 
-    <div *ngIf="nuevoProc">
-        <label for="proc_en_cursoFechaFin">Fecha de Fin:</label>
-        <input id="proc_en_cursoFechaFin" formControlName="proc_en_cursoFechaFin" type="date" />
-    </div> -->
+        <input id="proc_en_cursoFechaInicio" required formControlName="proc_en_cursoFechaInicio" type="date" />
+    </div>
 
-    <!-- <div *ngIf="nuevoProc">
+    <div>
+        <label for="proc_en_cursoFechaFin">Fecha de Fin:</label>
+        <input id="proc_en_cursoFechaFin" required formControlName="proc_en_cursoFechaFin" type="date" />
+    </div>
+
+    <div>
         <label for="proc_en_cursoIdCompraAnt">ID Compra Anterior:</label>
         <input 
             id="proc_en_cursoIdCompraAnt" 
@@ -74,7 +84,12 @@
             type="text" 
             readonly 
         />
-    </div> -->
+    </div>
+    <div>
+        <label for="proc_en_cursoProcNuevo">Proc compra nuevo:</label>
+        <input id="proc_en_cursoProcNuevo"  formControlName="proc_en_cursoProcNuevo" type="text" />
+    </div>
 
-    <button type="submit">Guardar</button>
+    <button *ngIf="!editar" (click)="addCompra()">Guardar</button>
+    <button *ngIf="editar" (click)="editarCompra()">Editar</button>
 </form>

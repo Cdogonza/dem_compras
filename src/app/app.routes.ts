@@ -1,6 +1,8 @@
 import { Routes } from '@angular/router';
 import { DetallesComponent } from './detalles/detalles.component';
 import { ProcEnCursComponent } from './proc-en-curs/proc-en-curs.component';
+import { FormNewProcComponent } from './form-new-proc/form-new-proc.component';
+import { ComprasMantenimientosFormComponent } from './compras-mantenimientos-form/compras-mantenimientos-form.component';
 
 export const routes: Routes = [
   {
@@ -9,24 +11,11 @@ export const routes: Routes = [
     pathMatch: 'full', // Asegura que la redirección se aplique solo a la raíz
   },
     {
-      path: 'nuevo-formulario',
-      loadComponent: () =>
-        import('./compras-mantenimientos-form/compras-mantenimientos-form.component').then(
-          (m) => m.ComprasMantenimientosFormComponent
-        ),
-
-
-
-    },
-    {
         path: 'dashboard',
         loadComponent: () =>
           import('./dashboard/dashboard.component').then(
             (m) => m.DashboardComponent
           ),
-  
-  
-  
       },
 
       {
@@ -37,5 +26,13 @@ export const routes: Routes = [
         path: 'proc-en-curso/:id',
         component: ProcEnCursComponent,
       },
+      {
+        path: 'form_new_proc/:id/:editar',
+        component: FormNewProcComponent,
+      },
+      {
+        path: 'nuevo-formulario/:id',
+        component: ComprasMantenimientosFormComponent,
+      }
     // otras rutas...
   ];
