@@ -1,4 +1,5 @@
 {
+  "version": 2,
   "builds": [
     {
       "src": "angular.json",
@@ -8,8 +9,8 @@
 
   "routes": [
    {
-      "source": "/(.*)",
-      "destination": "/index.html"
+      "src": "/.*",
+      "dest": "/index.html"
     }
   ],
   "outputDirectory": "dist/dem_compras"
