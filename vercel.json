@@ -1,17 +1,17 @@
 {
   "version": 2,
-  "builds": [
-    {
-      "src": "angular.json",
-      "use": "@vercel/angular"
-    }
-  ],
-
-  "routes": [
-   {
-      "src": "/.*",
-      "dest": "/index.html"
-    }
-  ],
-  "outputDirectory": "dist/dem_compras"
-}
+    "builds": [
+      {
+        "src": "angular.json",
+        "use": "@vercel/angular"
+      }
+    ],
+    "rewrites": [
+      {
+        "source": "/(.*)",
+        "destination": "/index.html"
+      }
+    ],
+    "outputDirectory": "dist"
+  }
+  
